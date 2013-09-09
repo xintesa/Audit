@@ -14,7 +14,7 @@ class Article extends CakeTestModel {
 	public $name = 'Article';
 
 	public $actsAs = array(
-		'AuditLog.Auditable' => array(
+		'Audit.Auditable' => array(
 			'ignore' => array( 'ignored_field' ),
 		)
 	);
@@ -34,7 +34,7 @@ class Author extends CakeTestModel {
 	public $name = 'Author';
 
 	public $actsAs = array(
-		'AuditLog.Auditable'
+		'Audit.Auditable'
 	);
 
 	public $hasMany = array( 'Article' );
@@ -68,10 +68,10 @@ class AuditableBehaviorTest extends CakeTestCase {
  * @access public
  */
 	public $fixtures = array(
-		'plugin.audit_log.article',
-		'plugin.audit_log.author',
-		'plugin.audit_log.audit',
-		'plugin.audit_log.audit_delta',
+		'plugin.audit.article',
+		'plugin.audit.author',
+		'plugin.audit.audit',
+		'plugin.audit.audit_delta',
 	);
 
 /**
@@ -79,7 +79,7 @@ class AuditableBehaviorTest extends CakeTestCase {
  *
  * @access public
  */
-	public function startTest() {
+	public function setUp() {
 		$this->Article = ClassRegistry::init( 'Article' );
 	}
 
@@ -88,7 +88,7 @@ class AuditableBehaviorTest extends CakeTestCase {
  *
  * @access public
  */
-	public function endTest() {
+	public function tearDown() {
 		unset( $this->Article );
 
 		ClassRegistry::flush();
@@ -401,10 +401,10 @@ class AuditableBehaviorTest extends CakeTestCase {
 	public function testDelete() {
 		$this->Audit      = ClassRegistry::init( 'Audit' );
 		$this->AuditDelta = ClassRegistry::init( 'AuditDelta' );
-		$article = $this->Article->find('first', array(
+		$articles = $this->Article->find('all', array(
 			'contain' => false,
-			'order'   => array( 'rand()' ),
 		));
+		$article = $articles[array_rand($articles)];
 
 		$id = $article['Article']['id'];
 
