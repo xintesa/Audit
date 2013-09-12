@@ -1,5 +1,8 @@
 <?php
 
+App::uses('ModelBehavior', 'Model');
+App::uses('AuthComponent', 'Controller/Component');
+
 /**
  * Records changes made to an object during save operations.
  */
@@ -112,6 +115,8 @@ class AuditableBehavior extends ModelBehavior {
 			$source = $Model->currentUser();
 		} else if ( $Model->hasMethod( 'current_user' ) ) {
 			$source = $Model->current_user();
+		} else {
+			$source = AuthComponent::user();
 		}
 
 		$data = array(
