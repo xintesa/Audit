@@ -26,6 +26,15 @@ class AuditsController extends AuditAppController {
 
 	public function admin_index() {
 		$this->Prg->commonProcess();
+		$this->Audit->bindModel(array(
+			'belongsTo' => array(
+				'User' => array(
+					'fields' => array('id', 'username'),
+					'className' => 'Users.User',
+					'foreignKey' => 'source_id',
+				),
+			),
+		));
 		$criteria = $this->Audit->parseCriteria($this->request->query);
 		$audits = $this->paginate($criteria);
 		$searchFields = array(

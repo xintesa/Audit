@@ -17,8 +17,7 @@ $this->set('showActions', false);
 		<th><?php echo $this->Paginator->sort('model'); ?></th>
 		<th><?php echo $this->Paginator->sort('entity_id'); ?></th>
 		<th><?php echo Inflector::humanize('json_object'); ?></th>
-		<th><?php echo $this->Paginator->sort('description'); ?></th>
-		<th><?php echo $this->Paginator->sort('source_id'); ?></th>
+		<th><?php echo $this->Paginator->sort('source_id', __d('audit', 'Username')); ?></th>
 		<th><?php echo $this->Paginator->sort('created'); ?></th>
 		<th class="actions"><?php echo __d('croogo', 'Actions'); ?></th>
 	</tr>
@@ -40,25 +39,44 @@ $this->set('showActions', false);
 			?>
 			&nbsp;
 		</td>
-		<td><?php echo h($audit['Audit']['description']); ?>&nbsp;</td>
-		<td><?php echo h($audit['Audit']['source_id']); ?>&nbsp;</td>
+		<td>
+		<?php
+			if (isset($audit['User']['username'])):
+				echo $this->Html->link($audit['User']['username'], array(
+					'plugin' => 'users',
+					'controller' => 'users',
+					'action' => 'index',
+					'?' => array(
+						'id' => $audit['User']['id'],
+					),
+				), array(
+					'data-title' => __d('audit', 'User: %s', $audit['User']['username']),
+					'class' => 'ajax-dialog',
+				));
+			else:
+				echo h($audit['Audit']['source_id']);
+			endif;
+		?>&nbsp;
+		</td>
 		<td><?php echo h($audit['Audit']['created']); ?>&nbsp;</td>
 		<td class="item-actions">
 			<?php echo $this->Croogo->adminRowAction('', array('action' => 'view', $audit['Audit']['id']), array('icon' => 'eye-open')); ?>
 			<?php
-				echo $this->Croogo->adminRowAction('', array(
-					'admin' => true,
-					'plugin' => 'audit',
-					'controller' => 'audit_deltas',
-					'action' => 'index',
-					'?' => array(
-						'audit_id' => $audit['Audit']['id'],
-					),
-				), array(
-					'data-title' => 'Audit Record ' . $audit['Audit']['id'],
-					'class' => 'ajax-dialog',
-					'icon' => 'folder-open',
-				));
+				if ($audit['Audit']['event'] === 'EDIT'):
+					echo $this->Croogo->adminRowAction('', array(
+						'admin' => true,
+						'plugin' => 'audit',
+						'controller' => 'audit_deltas',
+						'action' => 'index',
+						'?' => array(
+							'audit_id' => $audit['Audit']['id'],
+						),
+					), array(
+						'data-title' => 'Audit Record ' . $audit['Audit']['id'],
+						'class' => 'ajax-dialog',
+						'icon' => 'folder-open',
+					));
+				endif;
 				?>
 		</td>
 	</tr>
