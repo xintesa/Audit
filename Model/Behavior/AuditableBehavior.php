@@ -220,6 +220,8 @@ class AuditableBehavior extends ModelBehavior {
 			$source = $Model->currentUser();
 		} else if ( $Model->hasMethod( 'current_user' ) ) {
 			$source = $Model->current_user();
+		} else {
+			$source = AuthComponent::user();
 		}
 
 		$audit = array( $Model->alias => $this->_original[$Model->alias] );
