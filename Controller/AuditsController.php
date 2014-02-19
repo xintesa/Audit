@@ -4,6 +4,10 @@ App::uses('AuditAppController', 'Audit.Controller');
 
 class AuditsController extends AuditAppController {
 
+	public $components = array(
+		'Search.Prg',
+	);
+
 	public $uses = array(
 		'Audit.Audit',
 	);
