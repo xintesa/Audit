@@ -2,7 +2,7 @@
 	"name": "xintesa/audit",
 	"type": "cakephp-plugin",
 	"description": "Croogo Plugin for auditing edits",
-	"homepage": "http://github.com/xintesa/assets",
+	"homepage": "http://github.com/xintesa/Audit",
 	"license": "MIT",
 	"authors": [
 		{
