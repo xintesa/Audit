@@ -141,7 +141,7 @@ class AuditableBehavior extends ModelBehavior {
 				continue;
 			}
 
-			if( !$created ) {
+			if( !$created && !is_array($value)) {
 				if( array_key_exists( $property, $this->_original[$Model->alias] ) && $this->_original[$Model->alias][$property] != $value ) {
 					// If the property exists in the original _and_ the
 					// value is different, store it.
