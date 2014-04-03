@@ -9,6 +9,10 @@ class AuditDeltasController extends AuditAppController {
 		'Audit.AuditDelta',
 	);
 
+	public $components = array(
+		'Search.Prg',
+	);
+
 	public $presetVars = true;
 
 	public function beforeFilter() {

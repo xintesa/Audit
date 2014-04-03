@@ -9,7 +9,6 @@ class AuditSettingsController extends AuditAppController {
 	);
 
 	public function admin_index() {
-
 		if ($this->request->is('post') && isset($this->request->data)) {
 			$models = $this->request->data['Audit']['models'];
 			$models = array_combine(array_values($models), array_values($models));
