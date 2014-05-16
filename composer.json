@@ -1,14 +1,14 @@
 {
 	"name": "xintesa/audit",
-	"type": "cakephp-plugin",
-	"description": "Croogo Plugin for auditing edits",
+	"type": "croogo-plugin",
+	"description": "Croogo Audit Plugin",
 	"homepage": "http://github.com/xintesa/Audit",
 	"license": "MIT",
 	"authors": [
 		{
 			"name": "Rachman Chavik",
-			"email": "contact@xintesa.com",
-			"homepage": "http://xintesa.com"
+			"email": "oss@xintesa.com",
+			"homepage": "http://xintesa.com/"
 		}
 	],
 	"require": {

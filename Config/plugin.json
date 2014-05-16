@@ -1,14 +1,4 @@
 {
-	"name": "Audit",
-	"description": "Audit plugin integration for Croogo",
-
-	"author": "Rachman Chavik",
-	"authorEmail": "oss@xintesa.com",
-	"authorUrl": "http://xintesa.com",
-
-	"originalAuthor": "Rob Wilkerson",
-	"originalUrl": "https://github.com/robwilkerson/CakePHP-Audit-Log-Plugin",
-
 	"dependencies": {
 		"plugin": [
 			"Search"
