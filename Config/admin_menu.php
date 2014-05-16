@@ -9,6 +9,16 @@ CroogoNav::add('extensions.children.audit', array(
 		'action' => 'index',
 	),
 	'children' => array(
+		'sessions' => array(
+			'title' => 'Session Audit',
+			'url' => array(
+				'admin' => true,
+				'plugin' => 'audit',
+				'controller' => 'session_audits',
+				'action' => 'index',
+			),
+			'weight' => 1,
+		),
 		'records' => array(
 			'title' => 'Audit Records',
 			'url' => array(
@@ -17,7 +27,7 @@ CroogoNav::add('extensions.children.audit', array(
 				'controller' => 'audits',
 				'action' => 'index',
 			),
-			'weight' => 1,
+			'weight' => 5,
 		),
 		'setting' => array(
 			'title' => 'Settings',
@@ -27,7 +37,7 @@ CroogoNav::add('extensions.children.audit', array(
 				'controller' => 'audit_settings',
 				'action' => 'index',
 			),
-			'weight' => 5,
+			'weight' => 10,
 		)
 	),
 ));
