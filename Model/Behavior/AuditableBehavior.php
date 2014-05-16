@@ -121,6 +121,7 @@ class AuditableBehavior extends ModelBehavior {
 
 		$data = array(
 			'Audit' => array(
+				'session_id' => session_id(),
 				'event'     => $created ? 'CREATE' : 'EDIT',
 				'model'     => $Model->alias,
 				'entity_id' => $Model->id,
