@@ -7,6 +7,9 @@ $this->Html
 	->addCrumb(__d('croogo', 'Session Audits'), array('action' => 'index'));
 
 ?>
+<?php $this->start('actions'); ?>
+&nbsp;
+<?php $this->end('actions'); ?>
 
 <div class="sessionAudits index">
 	<table class="table table-striped">
