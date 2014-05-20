@@ -11,12 +11,7 @@ $this->Html
 <div class="row-fluid">
 	<div class="span12 actions">
 		<ul class="nav-buttons">
-		<li><?php echo $this->Html->link(__d('croogo', 'Edit Session Audit'), array('action' => 'edit', $sessionAudit['SessionAudit']['id']), array('button' => 'default')); ?> </li>
-		<li><?php echo $this->Form->postLink(__d('croogo', 'Delete Session Audit'), array('action' => 'delete', $sessionAudit['SessionAudit']['id']), array('button' => 'danger', 'escape' => true), __d('croogo', 'Are you sure you want to delete # %s?', $sessionAudit['SessionAudit']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__d('croogo', 'List Session Audits'), array('action' => 'index'), array('button' => 'default')); ?> </li>
-		<li><?php echo $this->Html->link(__d('croogo', 'New Session Audit'), array('action' => 'add'), array('button' => 'success')); ?> </li>
-		<li><?php echo $this->Html->link(__d('croogo', 'List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__d('croogo', 'New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 		</ul>
 	</div>
 </div>
