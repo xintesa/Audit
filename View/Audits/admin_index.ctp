@@ -1,4 +1,5 @@
 <?php
+
 $this->viewVars['title_for_layout'] = __d('croogo', 'Audits');
 $this->extend('/Common/admin_index');
 
@@ -6,22 +7,25 @@ $this->Html
 	->addCrumb('', '/admin', array('icon' => 'home'))
 	->addCrumb(__d('croogo', 'Audits'), array('action' => 'index'));
 
-$this->set('showActions', false);
-?>
+$this->set('showActions', false); ?>
 
-<div class="audits index">
 	<table class="table table-striped">
-	<tr>
-		<th><?php echo $this->Paginator->sort('id'); ?></th>
-		<th><?php echo $this->Paginator->sort('event'); ?></th>
-		<th><?php echo $this->Paginator->sort('model'); ?></th>
-		<th><?php echo $this->Paginator->sort('entity_id'); ?></th>
-		<th><?php echo Inflector::humanize('json_object'); ?></th>
-		<th><?php echo $this->Paginator->sort('source_id', __d('audit', 'Username')); ?></th>
-		<th><?php echo $this->Paginator->sort('created'); ?></th>
-		<th class="actions"><?php echo __d('croogo', 'Actions'); ?></th>
-	</tr>
-	<?php foreach ($audits as $audit): ?>
+<?php
+		$this->append('table-heading');
+$tableHeaders = $this->Html->tableHeaders(array(
+		$this->Paginator->sort('id'),
+		$this->Paginator->sort('event'),
+		$this->Paginator->sort('model'),
+		$this->Paginator->sort('entity_id'),
+		Inflector::humanize('json_object'),
+		$this->Paginator->sort('source_id', __d('audit', 'Username')),
+		$this->Paginator->sort('created'),
+		__d('croogo', 'Actions'),
+	));
+		echo $this->Html->tag('thead', $tableHeaders);
+$this->end();
+
+foreach ($audits as $audit): ?>
 	<tr>
 		<td><?php echo h($audit['Audit']['id']); ?>&nbsp;</td>
 		<td><?php echo h($audit['Audit']['event']); ?>&nbsp;</td>
