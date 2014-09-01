@@ -7,12 +7,11 @@ $this->Html
 	->addCrumb('', '/admin', array('icon' => 'home'))
 	->addCrumb(__d('croogo', 'Audits'), array('action' => 'index'));
 
-$this->set('showActions', false); ?>
+$this->set('showActions', false);
 
-	<table class="table table-striped">
-<?php
-		$this->append('table-heading');
-$tableHeaders = $this->Html->tableHeaders(array(
+$this->append('table-heading');
+
+	$tableHeaders = $this->Html->tableHeaders(array(
 		$this->Paginator->sort('id'),
 		$this->Paginator->sort('event'),
 		$this->Paginator->sort('model'),
@@ -25,6 +24,7 @@ $tableHeaders = $this->Html->tableHeaders(array(
 		echo $this->Html->tag('thead', $tableHeaders);
 $this->end();
 
+$this->append('table-body');
 foreach ($audits as $audit): ?>
 	<tr>
 		<td><?php echo h($audit['Audit']['id']); ?>&nbsp;</td>
@@ -85,9 +85,8 @@ foreach ($audits as $audit): ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
-	</table>
-</div>
 <?php
+$this->end();
 
 $script = <<<EOF
 $(".btn-json-view").on("click", function() {
@@ -112,8 +111,7 @@ $('.ajax-dialog').on('click', function() {
 EOF;
 $this->Js->buffer($script);
 
-echo $this->element('admin/modal', array(
+$this->append('page-footer', $this->element('admin/modal', array(
 	'id' => 'json-modal',
 	'class' => 'hide',
-));
-?>
+)));
