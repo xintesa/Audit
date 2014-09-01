@@ -1,4 +1,5 @@
 <?php
+
 $this->viewVars['title_for_layout'] = __d('croogo', 'Session Audits');
 $this->extend('/Common/admin_index');
 
