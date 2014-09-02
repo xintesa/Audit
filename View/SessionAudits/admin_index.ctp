@@ -1,4 +1,5 @@
 <?php
+
 $this->viewVars['title_for_layout'] = __d('croogo', 'Session Audits');
 $this->extend('/Common/admin_index');
 
@@ -6,30 +7,29 @@ $this->Html
 	->addCrumb('', '/admin', array('icon' => 'home'))
 	->addCrumb(__d('croogo', 'Session Audits'), array('action' => 'index'));
 
-?>
-<?php $this->start('actions'); ?>
-&nbsp;
-<?php $this->end('actions'); ?>
 
-<div class="sessionAudits index">
-	<table class="table table-striped">
-	<tr>
-		<th>
-			<?php echo $this->Paginator->sort('id'); ?><br />
-			<?php echo $this->Paginator->sort('session_id'); ?><br />
-			<?php echo $this->Paginator->sort('event'); ?>
-		</th>
-		<th><?php echo $this->Paginator->sort('user_id'); ?></th>
-		<th><?php echo $this->Paginator->sort('source_id'); ?></th>
-		<th><?php echo $this->Paginator->sort('remote_addr'); ?></th>
-		<th>
-			<?php echo $this->Paginator->sort('ua'); ?><br />
-			<?php echo $this->Paginator->sort('referer'); ?><br />
-			<?php echo $this->Paginator->sort('created'); ?>
-		</th>
-		<th class="actions"><?php echo __d('croogo', 'Actions'); ?></th>
-	</tr>
-	<?php foreach ($sessionAudits as $sessionAudit): ?>
+$this->set('showActions', false);
+
+$this->append('table-heading');
+
+	$tableHeaders = $this->Html->tableHeaders(array(
+		$this->Paginator->sort('id') . '<br />' .
+		$this->Paginator->sort('session_id') . '<br />' .
+		$this->Paginator->sort('event') . '</th>',
+
+		$this->Paginator->sort('user_id'),
+		$this->Paginator->sort('source_id'),
+		$this->Paginator->sort('remote_addr'),
+
+		$this->Paginator->sort('ua') . '<br />' .
+		$this->Paginator->sort('referer') . '<br />' .
+		$this->Paginator->sort('created') . '<th>' . '</th>'
+	));
+	echo $this->Html->tag('thead', $tableHeaders);
+$this->end();
+
+$this->append('table-body');
+foreach ($sessionAudits as $sessionAudit): ?>
 	<tr>
 		<td>
 			<?php echo h($sessionAudit['SessionAudit']['id']); ?>&nbsp;<br />
@@ -68,5 +68,6 @@ $this->Html
 		</td>
 	</tr>
 <?php endforeach; ?>
-	</table>
-</div>
+<?php
+
+$this->end();

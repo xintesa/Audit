@@ -1,4 +1,5 @@
 <?php
+
 $this->viewVars['title_for_layout'] = __d('croogo', 'Audits');
 $this->extend('/Common/admin_index');
 
@@ -7,21 +8,23 @@ $this->Html
 	->addCrumb(__d('croogo', 'Audits'), array('action' => 'index'));
 
 $this->set('showActions', false);
-?>
 
-<div class="audits index">
-	<table class="table table-striped">
-	<tr>
-		<th><?php echo $this->Paginator->sort('id'); ?></th>
-		<th><?php echo $this->Paginator->sort('event'); ?></th>
-		<th><?php echo $this->Paginator->sort('model'); ?></th>
-		<th><?php echo $this->Paginator->sort('entity_id'); ?></th>
-		<th><?php echo Inflector::humanize('json_object'); ?></th>
-		<th><?php echo $this->Paginator->sort('source_id', __d('audit', 'Username')); ?></th>
-		<th><?php echo $this->Paginator->sort('created'); ?></th>
-		<th class="actions"><?php echo __d('croogo', 'Actions'); ?></th>
-	</tr>
-	<?php foreach ($audits as $audit): ?>
+$this->append('table-heading');
+	$tableHeaders = $this->Html->tableHeaders(array(
+		$this->Paginator->sort('id'),
+		$this->Paginator->sort('event'),
+		$this->Paginator->sort('model'),
+		$this->Paginator->sort('entity_id'),
+		Inflector::humanize('json_object'),
+		$this->Paginator->sort('source_id', __d('audit', 'Username')),
+		$this->Paginator->sort('created'),
+		__d('croogo', 'Actions'),
+	));
+	echo $this->Html->tag('thead', $tableHeaders);
+$this->end();
+
+$this->append('table-body');
+foreach ($audits as $audit): ?>
 	<tr>
 		<td><?php echo h($audit['Audit']['id']); ?>&nbsp;</td>
 		<td><?php echo h($audit['Audit']['event']); ?>&nbsp;</td>
@@ -30,8 +33,9 @@ $this->set('showActions', false);
 		<td>
 			<?php
 				echo $this->Html->link(__d('croogo', 'View'), '#', array(
-					'button' => array('json-view'),
-					'icon' => array('large', 'eye-open'),
+					'button' => 'default',
+					'icon' => 'eye-open',
+					'class' => 'json-view',
 					'data-target' => '#json-modal',
 					'data-title' => $audit['Audit']['model'] . ' ' . $audit['Audit']['entity_id'],
 					'data-content' => h(CroogoJson::stringify(json_decode($audit['Audit']['json_object']))),
@@ -81,17 +85,17 @@ $this->set('showActions', false);
 		</td>
 	</tr>
 <?php endforeach; ?>
-	</table>
-</div>
 <?php
+$this->end();
 
 $script = <<<EOF
-$(".btn-json-view").on("click", function() {
+$(".json-view").on("click", function() {
 	var el= \$(this)
 	var modal = \$('#json-modal');
+	var content = JSON.stringify(el.data('content'), null, 4);
 	$('#json-modal')
 		.find('.modal-header h3').html(el.data("title")).end()
-		.find('.modal-body').html('<pre>' + el.data('content') + '</pre>').end()
+		.find('.modal-body').html('<pre>' + content + '</pre>').end()
 		.modal('toggle');
 });
 $('.ajax-dialog').on('click', function() {
@@ -108,8 +112,6 @@ $('.ajax-dialog').on('click', function() {
 EOF;
 $this->Js->buffer($script);
 
-echo $this->element('admin/modal', array(
+$this->append('page-footer', $this->element('admin/modal', array(
 	'id' => 'json-modal',
-	'class' => 'hide',
-));
-?>
+)));
