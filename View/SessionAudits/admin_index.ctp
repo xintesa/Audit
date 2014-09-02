@@ -7,13 +7,9 @@ $this->Html
 	->addCrumb('', '/admin', array('icon' => 'home'))
 	->addCrumb(__d('croogo', 'Session Audits'), array('action' => 'index'));
 
-?>
-<?php $this->start('actions'); ?>
-&nbsp;
-<?php $this->end('actions'); ?>
 
-	<table class="table table-striped">
-<?php
+$this->set('showActions', false);
+
 $this->append('table-heading');
 
 	$tableHeaders = $this->Html->tableHeaders(array(
@@ -31,9 +27,8 @@ $this->append('table-heading');
 	));
 	echo $this->Html->tag('thead', $tableHeaders);
 $this->end();
-echo __d('croogo', 'Actions');?>
 
-<?php
+$this->append('table-body');
 foreach ($sessionAudits as $sessionAudit): ?>
 	<tr>
 		<td>
@@ -73,4 +68,6 @@ foreach ($sessionAudits as $sessionAudit): ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
-	</table>
+<?php
+
+$this->end();
