@@ -10,7 +10,6 @@ $this->Html
 $this->set('showActions', false);
 
 $this->append('table-heading');
-
 	$tableHeaders = $this->Html->tableHeaders(array(
 		$this->Paginator->sort('id'),
 		$this->Paginator->sort('event'),
@@ -21,7 +20,7 @@ $this->append('table-heading');
 		$this->Paginator->sort('created'),
 		__d('croogo', 'Actions'),
 	));
-		echo $this->Html->tag('thead', $tableHeaders);
+	echo $this->Html->tag('thead', $tableHeaders);
 $this->end();
 
 $this->append('table-body');
@@ -34,8 +33,9 @@ foreach ($audits as $audit): ?>
 		<td>
 			<?php
 				echo $this->Html->link(__d('croogo', 'View'), '#', array(
-					'button' => array('json-view'),
-					'icon' => array('large', 'eye-open'),
+					'button' => 'default',
+					'icon' => 'eye-open',
+					'class' => 'json-view',
 					'data-target' => '#json-modal',
 					'data-title' => $audit['Audit']['model'] . ' ' . $audit['Audit']['entity_id'],
 					'data-content' => h(CroogoJson::stringify(json_decode($audit['Audit']['json_object']))),
@@ -89,12 +89,13 @@ foreach ($audits as $audit): ?>
 $this->end();
 
 $script = <<<EOF
-$(".btn-json-view").on("click", function() {
+$(".json-view").on("click", function() {
 	var el= \$(this)
 	var modal = \$('#json-modal');
+	var content = JSON.stringify(el.data('content'), null, 4);
 	$('#json-modal')
 		.find('.modal-header h3').html(el.data("title")).end()
-		.find('.modal-body').html('<pre>' + el.data('content') + '</pre>').end()
+		.find('.modal-body').html('<pre>' + content + '</pre>').end()
 		.modal('toggle');
 });
 $('.ajax-dialog').on('click', function() {
@@ -113,5 +114,4 @@ $this->Js->buffer($script);
 
 $this->append('page-footer', $this->element('admin/modal', array(
 	'id' => 'json-modal',
-	'class' => 'hide',
 )));
