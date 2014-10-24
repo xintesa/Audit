@@ -1,15 +1,22 @@
 <?php
 
+$this->extend('/Common/admin_edit');
+
 $this->viewVars['title_for_layout'] = __d('audit', 'Audit Settings');
 
-echo $this->Form->create(false);
+$this->Html
+	->addCrumb('', '/admin', array('icon' => $_icons['home']))
+	->addCrumb(__d('audit', 'Audit Settings'), '/' . $this->request->url);
 
-echo $this->Form->input('Audit.models', array(
-	'label' => __d('audit', 'Audited Models'),
-	'multiple' => 'checkbox',
-	'options' => $models,
-));
 
-echo $this->Form->submit('Save');
+$this->append('form-start', $this->Form->create(false));
 
-echo $this->Form->end();
+$this->append('tab-content');
+	echo $this->Form->input('Audit.models', array(
+		'label' => __d('audit', 'Audited Models'),
+		'multiple' => 'checkbox',
+		'options' => $models,
+	));
+$this->end();
+
+$this->append('form-end', $this->Form->end());
