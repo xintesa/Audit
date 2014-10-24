@@ -38,10 +38,16 @@ foreach ($sessionAudits as $sessionAudit): ?>
 		</td>
 		<td>
 			<?php
-				echo $this->Html->link($sessionAudit['User']['name'], array(
-					'plugin' => 'users', 'controller' => 'users', 'action' => 'view',
-					$sessionAudit['User']['id']
-				));
+				if (!empty($sessionAudit['User']['name'])) {
+					echo $this->Html->link($sessionAudit['User']['name'], array(
+							'plugin' => 'users',
+							'controller' => 'users',
+							'action' => 'view',
+							$sessionAudit['User']['id']
+						));
+				} else {
+					echo $sessionAudit['SessionAudit']['user_id'];
+				}
 			?>
 		</td>
 		<td>
