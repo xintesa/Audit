@@ -22,6 +22,30 @@ class AuditEventHandler implements CakeEventListener {
 		return $loginEvents;
 	}
 
+	protected function _guessUserId($controller) {
+		if (empty($controller->request->data)) {
+			return null;
+		}
+		$request = $controller->request;
+		$modelClass = $controller->modelClass;
+		$model = $controller->{$modelClass};
+		$usernameFields = array('username' => null, 'email' => null);
+
+		if ($model) {
+			$usernameField = key(array_intersect_key(
+				$usernameFields,
+				$request->data[$model->alias]
+			));
+			$username = $request->data[$model->alias][$usernameField];
+			$userId = $model->field('id', array($usernameField => $username));
+			if ($userId) {
+				return $userId;
+			}
+			return $username;
+		}
+		return -1;
+	}
+
 	public function onLoginEvents($event) {
 		$safe = Configure::read('Audit.trustHttpForwardedFor');
 		if ($safe === null) {
@@ -30,6 +54,9 @@ class AuditEventHandler implements CakeEventListener {
 		$controller = $event->subject;
 
 		$user_id = $source_id = AuthComponent::user('id');
+		if (empty($user_id)) {
+			$user_id = $this->_guessUserId($controller);
+		}
 		$host = env('HTTP_HOST');
 		$ua = env('HTTP_USER_AGENT');
 		$referer = $controller->request->referer();

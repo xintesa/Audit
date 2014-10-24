@@ -24,6 +24,11 @@ class SessionAuditsController extends AuditAppController {
  */
 	public function admin_index() {
 		$this->SessionAudit->recursive = 0;
+		if (empty($this->request->params['named']['direction'])) {
+			$this->Paginator->settings['order'] = array(
+				'SessionAudit.created' => 'DESC',
+			);
+		}
 		$this->set('sessionAudits', $this->paginate());
 	}
 
