@@ -66,7 +66,10 @@ class AuditableBehavior extends ModelBehavior {
 		// If we're editing an existing object, save off a copy of
 		// the object as it exists before any changes.
 		if( !empty( $Model->id ) ) {
-			$this->_original[$Model->alias] = $this->_getModelData( $Model );
+			$modelData = $this->_getModelData( $Model );
+			if (!empty($modelData)) {
+				$this->_original[$Model->alias] = $modelData;
+			}
 		}
 		return true;
 	}
@@ -262,6 +265,11 @@ class AuditableBehavior extends ModelBehavior {
 			'conditions' => array( $Model->alias . '.' . $Model->primaryKey => $Model->id )
 			)
 		);
+
+		if (!array_key_exists($Model->alias, $data)) {
+			$this->log(sprintf('No existing record to audit for alias %s', $Model->alias));
+			return array();
+		}
 
 		$audit_data = array(
 			$Model->alias => $data[$Model->alias]
