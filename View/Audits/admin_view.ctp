@@ -1,21 +1,20 @@
 <?php
-$this->viewVars['title_for_layout'] = sprintf('%s: %s', __d('croogo', 'Audits'), h($audit['Audit']['id']));
+$this->set('title_for_layout', sprintf('%s: %s', __d('croogo', 'Audits'), h($audit['Audit']['id'])));
+
+$this->set('displayFields', array());
+
+$this->extend('/Common/admin_index');
 
 $this->Html
 	->addCrumb('', '/admin', array('icon' => 'home'))
 	->addCrumb(__d('croogo', 'Audits'), array('action' => 'index'));
 
+$this->append('actions');
+	echo $this->Html->link(__d('croogo', 'List Audits'), array('action' => 'index'), array('button' => 'default'));
+$this->end();
+
+$this->append('table-body');
 ?>
-<h2 class="hidden-desktop"><?php echo __d('croogo', 'Audit'); ?></h2>
-
-<div class="row-fluid">
-	<div class="span12 actions">
-		<ul class="nav-buttons">
-		<li><?php echo $this->Html->link(__d('croogo', 'List Audits'), array('action' => 'index'), array('button' => 'default')); ?> </li>
-		</ul>
-	</div>
-</div>
-
 <div class="audits view">
 	<dl class="inline">
 		<dt><?php echo __d('croogo', 'Id'); ?></dt>
@@ -104,6 +103,7 @@ $this->Html
 <?php endif; ?>
 
 <?php
+$this->end();
 
 $script = <<<EOF
 $(".btn-json-view").on("click", function() {
@@ -118,9 +118,9 @@ $(".btn-json-view").on("click", function() {
 EOF;
 $this->Js->buffer($script);
 
+$this->append('page-footer');
 echo $this->element('admin/modal', array(
 	'id' => 'json-modal',
 	'class' => 'hide',
 ));
-?>
-</div>
+$this->end();
