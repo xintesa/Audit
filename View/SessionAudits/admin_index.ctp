@@ -70,7 +70,7 @@ foreach ($sessionAudits as $sessionAudit): ?>
 			<?php echo h($sessionAudit['SessionAudit']['created']); ?>&nbsp;
 		</td>
 		<td class="item-actions">
-			<?php echo $this->Croogo->adminRowAction('', array('action' => 'view', $sessionAudit['SessionAudit']['id']), array('icon' => 'eye-open')); ?>
+			<?php echo $this->Croogo->adminRowAction('', array('action' => 'view', $sessionAudit['SessionAudit']['id']), array('icon' => 'read')); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

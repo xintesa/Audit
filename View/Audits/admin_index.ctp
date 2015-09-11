@@ -34,7 +34,7 @@ foreach ($audits as $audit): ?>
 			<?php
 				echo $this->Html->link(__d('croogo', 'View'), '#', array(
 					'button' => 'default',
-					'icon' => 'eye-open',
+					'icon' => 'read',
 					'class' => 'json-view',
 					'data-target' => '#json-modal',
 					'data-title' => $audit['Audit']['model'] . ' ' . $audit['Audit']['entity_id'],
@@ -64,7 +64,7 @@ foreach ($audits as $audit): ?>
 		</td>
 		<td><?php echo h($audit['Audit']['created']); ?>&nbsp;</td>
 		<td class="item-actions">
-			<?php echo $this->Croogo->adminRowAction('', array('action' => 'view', $audit['Audit']['id']), array('icon' => 'eye-open')); ?>
+			<?php echo $this->Croogo->adminRowAction('', array('action' => 'view', $audit['Audit']['id']), array('icon' => 'read')); ?>
 			<?php
 				if ($audit['Audit']['event'] === 'EDIT'):
 					echo $this->Croogo->adminRowAction('', array(

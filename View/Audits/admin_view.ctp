@@ -43,7 +43,7 @@ $this->Html
 			<?php
 				echo $this->Html->link(__d('croogo', 'View'), '#', array(
 					'button' => array('json-view'),
-					'icon' => array('large', 'eye-open'),
+					'icon' => array('large', 'read'),
 					'data-target' => '#json-modal',
 					'data-title' => $audit['Audit']['model'] . ' ' . $audit['Audit']['entity_id'],
 					'data-content' => h(CroogoJson::stringify(json_decode($audit['Audit']['json_object']))),
