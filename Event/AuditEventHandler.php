@@ -24,7 +24,7 @@ class AuditEventHandler implements CakeEventListener {
 
 	protected function _guessUserId($controller) {
 		if (empty($controller->request->data)) {
-			return null;
+			return -1;
 		}
 		$request = $controller->request;
 		$modelClass = $controller->modelClass;
