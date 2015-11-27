@@ -75,6 +75,7 @@ class AuditEventHandler implements CakeEventListener {
 		$audit['event'] = $event->name;
 
 		$SessionAudit = ClassRegistry::init('Audit.SessionAudit');
+		$SessionAudit->create();
 		$result = $SessionAudit->save(array('SessionAudit' => $audit));
 		if (!$result) {
 			CakeLog::critical('Unable to log session audit records');
