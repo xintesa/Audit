@@ -27,6 +27,7 @@ class SessionAuditsController extends AuditAppController {
 		if (empty($this->request->params['named']['direction'])) {
 			$this->Paginator->settings['order'] = array(
 				'SessionAudit.created' => 'DESC',
+				'SessionAudit.session_id',
 			);
 		}
 		$this->set('sessionAudits', $this->paginate());

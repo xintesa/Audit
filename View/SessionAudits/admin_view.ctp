@@ -3,18 +3,19 @@ $this->viewVars['title_for_layout'] = sprintf('%s: %s', __d('croogo', 'Session A
 
 $this->Html
 	->addCrumb('', '/admin', array('icon' => 'home'))
-	->addCrumb(__d('croogo', 'Session Audits'), array('action' => 'index'));
+	->addCrumb(__d('croogo', 'Session Audits'), array('action' => 'index'))
+	->addCrumb($this->request->params['pass'][0], $this->here);
+
+$this->extend('/Common/admin_index');
 
 ?>
 <h2 class="hidden-desktop"><?php echo __d('croogo', 'Session Audit'); ?></h2>
 
-<div class="row-fluid">
-	<div class="span12 actions">
-		<ul class="nav-buttons">
-		<li><?php echo $this->Html->link(__d('croogo', 'List Session Audits'), array('action' => 'index'), array('button' => 'default')); ?> </li>
-		</ul>
-	</div>
-</div>
+<?php
+$this->start('actions');
+	echo $this->Croogo->adminAction(__d('croogo', 'Session Audits'), array('action' => 'index'), array('button' => 'default'));
+$this->end();
+?>
 
 <div class="sessionAudits view">
 	<dl class="inline">
@@ -30,12 +31,12 @@ $this->Html
 		</dd>
 		<dt><?php echo __d('croogo', 'User'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($sessionAudit['User']['name'], array('controller' => 'users', 'action' => 'view', $sessionAudit['User']['id'])); ?>
+			<?php echo h($sessionAudit['User']['name']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __d('croogo', 'Source'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($sessionAudit['Source']['name'], array('controller' => 'users', 'action' => 'view', $sessionAudit['Source']['id'])); ?>
+			<?php echo h($sessionAudit['Source']['name']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __d('croogo', 'Host'); ?></dt>
@@ -83,11 +84,15 @@ $this->Html
 			<?php echo h($sessionAudit['SessionAudit']['request_time']); ?>
 			&nbsp;
 		</dd>
+
+<?php if (false): ?>
 		<dt><?php echo __d('croogo', 'Request Time Float'); ?></dt>
 		<dd>
 			<?php echo h($sessionAudit['SessionAudit']['request_time_float']); ?>
 			&nbsp;
 		</dd>
+<?php endif; ?>
+
 		<dt><?php echo __d('croogo', 'Description'); ?></dt>
 		<dd>
 			<?php echo h($sessionAudit['SessionAudit']['description']); ?>
