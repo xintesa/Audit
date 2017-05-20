@@ -1,7 +1,5 @@
 <?php
 
-App::uses('ModelBehavior', 'Model');
-App::uses('AuthComponent', 'Controller/Component');
 
 /**
  * Records changes made to an object during save operations.

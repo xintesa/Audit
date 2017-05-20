@@ -1,6 +1,5 @@
 <?php
 
-App::uses('AuditAppController', 'Audit.Controller');
 
 /**
  * SessionAudits Controller

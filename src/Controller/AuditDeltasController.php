@@ -1,6 +1,5 @@
 <?php
 
-App::uses('AuditAppController', 'Audit.Controller');
 
 class AuditDeltasController extends AuditAppController {
 
@@ -15,8 +14,8 @@ class AuditDeltasController extends AuditAppController {
 
 	public $presetVars = true;
 
-	public function beforeFilter() {
-		parent::beforeFilter();
+	public function beforeFilter(Event $event) {
+		parent::beforeFilter($event);
 		$this->AuditDelta->setupSearchPlugin();
 		$this->Prg = $this->Components->load('Search.Prg', array(
 			'presetForm' => array(

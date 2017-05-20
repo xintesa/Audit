@@ -1,6 +1,5 @@
 <?php
 
-App::uses('AuditAppModel', 'Audit.Model');
 
 /**
  * SessionAudit Model

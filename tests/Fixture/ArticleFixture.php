@@ -1,19 +1,20 @@
 <?php
 
-class ArticleFixture extends CakeTestFixture {
+class ArticleFixture extends TestFixture {
 
 	public $name = 'Article';
 
 	public $fields = array(
-		'id'            => array('type' => 'integer', 'key' => 'primary'),
-		'user_id'       => array('type' => 'integer', 'null' => false),
-		'author_id'     => array( 'type' => 'integer', 'null' => false ),
-		'title'         => array('type' => 'string', 'null' => false),
-		'body'          => 'text',
-		'published'     => array('type' => 'string', 'length' => 1, 'default' => 'N'),
-		'ignored_field' => array( 'type' => 'integer', 'length' => 1, 'default' => 0 ),
-		'created'       => 'datetime',
-		'updated'       => 'datetime'
+		'id' => ['type' => 'integer'],
+		'user_id' => ['type' => 'integer', 'null' => false],
+		'author_id' => ['type' => 'integer', 'null' => false],
+		'title' => ['type' => 'string', 'null' => false],
+		'body' => 'text',
+		'published' => ['type' => 'string', 'length' => 1, 'default' => 'N'],
+		'ignored_field' => ['type' => 'integer', 'length' => 1, 'default' => 0],
+		'created' => 'datetime',
+		'updated' => 'datetime',
+		'_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]]
 	);
 
 /**

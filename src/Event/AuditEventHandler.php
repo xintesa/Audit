@@ -1,10 +1,7 @@
 <?php
 
-App::uses('CakeEventListener', 'Event');
-App::uses('AuthComponent', 'Controller/Component');
-App::uses('CakeLog', 'Log');
 
-class AuditEventHandler implements CakeEventListener {
+class AuditEventHandler implements EventListener {
 
 	protected $_events = array(
 		'Controller.Users.loginSuccessful',
@@ -78,7 +75,7 @@ class AuditEventHandler implements CakeEventListener {
 		$SessionAudit->create();
 		$result = $SessionAudit->save(array('SessionAudit' => $audit));
 		if (!$result) {
-			CakeLog::critical('Unable to log session audit records');
+			Log::critical('Unable to log session audit records');
 			$event->result = false;
 			$event->stopPropagation();
 		}

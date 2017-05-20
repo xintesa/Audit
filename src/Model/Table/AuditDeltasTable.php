@@ -1,6 +1,5 @@
 <?php
 
-App::uses('Model', 'Model');
 
 class AuditDelta extends Model {
 

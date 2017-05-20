@@ -1,6 +1,5 @@
 <?php
 
-App::uses('AuditAppController', 'Audit.Controller');
 
 class AuditSettingsController extends AuditAppController {
 
@@ -17,7 +16,7 @@ class AuditSettingsController extends AuditAppController {
 		}
 		$plugins = App::objects('plugin');
 		$models = array();
-		$cakePlugin = new CakePlugin();
+		$cakePlugin = new Plugin();
 		foreach ($plugins as $plugin) {
 			if (!$cakePlugin->loaded($plugin)) {
 				continue;

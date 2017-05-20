@@ -1,6 +1,5 @@
 <?php
 
-App::uses('Model', 'Model');
 
 class Audit extends Model {
 

@@ -1,7 +1,7 @@
 <?php
 
-App::uses( 'Model', 'Model' );
-App::uses( 'AppModel', 'Model' );
+/* TODO: /* TODO: App::uses( 'Model', 'Model' ); */ */
+/* TODO: /* TODO: App::uses( 'AppModel', 'Model' ); */ */
 
 /**
  * Article class
@@ -59,7 +59,7 @@ class AuditDelta extends CakeTestModel {
 /**
  * AuditableBehavior test class.
  */
-class AuditableBehaviorTest extends CakeTestCase {
+class AuditableBehaviorTest extends TestCase {
 
 /**
  * Fixtures associated with this test case

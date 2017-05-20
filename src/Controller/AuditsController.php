@@ -1,6 +1,5 @@
 <?php
 
-App::uses('AuditAppController', 'Audit.Controller');
 
 class AuditsController extends AuditAppController {
 
@@ -14,8 +13,8 @@ class AuditsController extends AuditAppController {
 
 	public $presetVars = true;
 
-	public function beforeFilter() {
-		parent::beforeFilter();
+	public function beforeFilter(Event $event) {
+		parent::beforeFilter($event);
 		$this->Audit->setupSearchPlugin();
 		$this->Prg = $this->Components->load('Search.Prg', array(
 			'presetForm' => array(
