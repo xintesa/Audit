@@ -1,6 +1,8 @@
 <?php
 
-CroogoNav::add('extensions.children.audit', array(
+use Croogo\Core\Nav;
+
+Nav::add('extensions.children.audit', [
 	'title' => 'Audit',
 	'url' => array(
 		'admin' => true,
@@ -40,4 +42,4 @@ CroogoNav::add('extensions.children.audit', array(
 			'weight' => 10,
 		)
 	),
-));
+]);

@@ -1,5 +1,8 @@
 <?php
 
+use Cake\Core\Configure;
+use Croogo\Core\Croogo;
+
 $auditModels = Configure::read('Audit.models');
 if ($auditModels) {
 	$models = (array)json_decode($auditModels, true);
