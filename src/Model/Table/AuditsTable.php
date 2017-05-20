@@ -1,7 +1,10 @@
 <?php
 
+namespace Xintesa\Audit\Model\Table;
 
-class Audit extends Model {
+use Cake\ORM\Table;
+
+class AuditsTable extends Table {
 
 	public function setupSearchPlugin() {
 		$this->order = 'Audit.created DESC';

@@ -1,9 +1,13 @@
 <?php
 
+namespace Xintesa\Audit\Model\Table;
 
-class AuditDelta extends Model {
+use Croogo\Core\Model\Table\CroogoTable as Table;
 
-	public function setupSearchPlugin() {
+class AuditDeltasTable extends Table {
+
+	public function setupSearchPlugin()
+    {
 		$this->order = 'AuditDelta.property_name';
 		$this->filterArgs = array(
 			'audit_id' => array('type' => 'value'),
@@ -13,4 +17,5 @@ class AuditDelta extends Model {
 		);
 		$this->Behaviors->load('Search.Searchable');
 	}
+
 }

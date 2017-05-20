@@ -1,35 +1,32 @@
 <?php
 
+namespace Xintesa\Audit\Model\Table;
+
+use Croogo\Core\Model\Table\CroogoTable as Table;
 
 /**
- * SessionAudit Model
+ * SessionAudits Table
  *
- * @property User $User
- * @property Source $Source
- * @property Session $Session
  */
-class SessionAudit extends AppModel {
+class SessionAuditsTable extends Table {
 
-/**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'User' => array(
-			'className' => 'User',
-			'foreignKey' => 'user_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Source' => array(
-			'className' => 'User',
-			'foreignKey' => 'source_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-	);
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+        $this->belongsTo('Users', [
+            'className' => 'User',
+            'foreignKey' => 'user_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ]);
+        $this->belongsTo('Sources', [
+            'className' => 'User',
+            'foreignKey' => 'source_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
+        ]);
+    }
 
 }
